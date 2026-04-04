@@ -12,14 +12,11 @@ Route::get('/', function () {
 // Route::get('teachers',function (){
 //     return Teacher::all();
 // });
+Route::get('add-data',[StudentController::class,'addData']);
 
-Route::get('teachers', [TeacherController::class,'index']);
+Route ::get('get-data',[StudentController::class, 'getData']);
 
-Route::get('add-teacher', [TeacherController::class,'add']);
+Route ::get('update-data',[StudentController::class, 'updateData']);
 
-Route::get('show-teacher/{id}',[ TeacherController::class,'show']);
-
-Route::get('update-teacher/{id}',[ TeacherController::class,'update']);
-
-Route::get('delete-teacher/{id}',[ TeacherController::class,'delete']);
+Route ::get('detete-data',[StudentController::class, 'deleteData']);
 
