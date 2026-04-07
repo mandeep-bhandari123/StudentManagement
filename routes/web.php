@@ -20,3 +20,6 @@ Route ::get('update-data',[StudentController::class, 'updateData']);
 
 Route ::get('detete-data',[StudentController::class, 'deleteData']);
 
+Route ::get('query-scope',[StudentController::class, 'queryScope']);
+
+
