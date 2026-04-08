@@ -3,18 +3,30 @@
 namespace App\Http\Controllers;
 
 use App\Models\Student;
-use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
-use function Laravel\Prompts\table;
 
 class StudentController extends Controller
 {
-  public function index(){
-    $students = Student::all();
-    return view("students.index", compact("students"));
-  }
-}
+    public function index(Request $request)
+    {
+        $students = Student::when($request->search, function ($query) use ($request) {
+            $search = $request->search;
 
+            $query->where('name', 'like', '%' . $search . '%')
+                  ->orWhere('email', 'like', '%' . $search . '%');
+
+            if (is_numeric($search)) {
+                $query->orWhere('age', $search);
+            }
+
+            if (strtotime($search)) {
+                $query->orWhere('date_of_birth', $search);
+            }
+        })->get();
+
+        return view('students.index', compact('students'));
+    }
+}
 
 ## THIS IS THE SECTION FOR USEFUL CODE SNIPIT
 

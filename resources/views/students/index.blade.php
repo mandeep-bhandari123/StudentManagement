@@ -77,10 +77,12 @@
 @section('content')
   <section>
     <h2>Students</h2>
-    <div class="search">
-      <input type="text" placeholder="Search">
-      <button>Search</button>
+    <form action = {{ URL('student') }}  method="GET">
+      <div class="search">
+        <input type="text" placeholder="Search" id="search" name="search">
+        <button type = 'submit'>Search</button>
     </div>
+    </form>
     <table>
       <thead>
         <tr>
@@ -100,7 +102,7 @@
             <td>{{ $student ->id }}</td>
             <td>{{ $student ->name}}</td>
             <td>{{ $student ->email}}</td>
-            <td>{{ $student -> age}}</td>
+            <td>{{ $student ->age}}</td>
             <td>{{ $student ->date_of_birth }}</td>
             <td>{{ $student ->gender}}</td>
             <td>No score</td>
