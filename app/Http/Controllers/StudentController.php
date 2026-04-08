@@ -9,40 +9,9 @@ use function Laravel\Prompts\table;
 
 class StudentController extends Controller
 {
-  public function addData()
-  {
-    $item = new Student();
-    $item->name = 'Tester 2.0';
-    $item->email = 'tester2@gmail.com';
-    $item->age = 34;
-    $item->date_of_birth = '2020-01-20';
-    $item->gender = 'f';
-    $item->save();
-  }
-  public function getData(){
-    $items = Student::select('id','name')
-    // ->find(55);
-    ->where('id','=','58')
-    ->first();
-    return $items;
-  }
-  public function updateData(){
-    $item = Student::where('id','=','58')->first();
-    $item ->name = 'Updated Student';
-    $item -> age = 34;
-    $item->save();
-    return "updated";
-  }
-  public function deleteData(){
-    // $item = Student::where("id","=","52")->first();
-    // $item->delete();
-    Student::findOrFail(68)->delete();
-    return "Deleted Succseefully";
-  }
-
-  public function queryScope(){
-    $item = Student::male()->get();
-    return $item;
+  public function index(){
+    $students = Student::all();
+    return view("students.index", compact("students"));
   }
 }
 
@@ -94,3 +63,44 @@ class StudentController extends Controller
 
     //   return ('Deleted Succesfully');
     // }
+
+
+  //    public function addData()
+  // {
+  //   $item = new Student();
+  //   $item->name = 'Tester 2.0';
+  //   $item->email = 'tester2@gmail.com';
+  //   $item->age = 34;
+  //   $item->date_of_birth = '2020-01-20';
+  //   $item->gender = 'f';
+  //   $item->save();
+  // }
+  // public function getData(){
+  //   $items = Student::select('id','name')
+  //   // ->find(55);
+  //   ->where('id','=','58')
+  //   ->first();
+  //   // $items = Student::onlyTrashed()->get(); # TO get deleted data
+  //   // $items = Student::withTrashed()->get(); # To get datas with deleted datas
+  //   // $items  = Student::withTrashed()->find(68)->restore(); #To restore Deleted data
+  //   //Student::find(1)->forceDelete(); # Permanently delete data
+  //   return $items;
+  // }
+  // public function updateData(){
+  //   $item = Student::where('id','=','58')->first();
+  //   $item ->name = 'Updated Student';
+  //   $item -> age = 34;
+  //   $item->save();
+  //   return "updated";
+  // }
+  // public function deleteData(){
+  //   // $item = Student::where("id","=","52")->first();
+  //   // $item->delete();
+  //   Student::findOrFail(68)->delete();
+  //   return "Deleted Succseefully";
+  // }
+
+  // public function queryScope(){
+  //   $item = Student::male()->get();
+  //   return $item;
+  // }
