@@ -71,6 +71,20 @@
     .deleteButton:hover{
       background-color: #da190b;
     }
+    .addStudentButton {
+      background-color: #005bb5;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      text-decoration: none;
+      display: inline-block;
+      border-radius: 5px;
+      margin-left: 10px;
+    }
+
+    .addStudentButton:hover {
+      background-color: #004080;
+    }
   </style>
 @endsection
 
@@ -79,11 +93,11 @@
     <h2>Students</h2>
     <form action = {{ URL('student') }}  method="GET">
       <div class="search">
-        <input type="text" placeholder="Search" id="search" name="search">
+        <input type="text" placeholder="Search" id="search" name="search" value= "{{ request('search') }}" >
         <button type = 'submit'>Search</button>
+        <a class="addStudentButton" href="{{ URL('student/add') }}">Add Students</a>
     </div>
     </form>
-    <table>
       <thead>
         <tr>
           <th>ID</th>
@@ -107,14 +121,25 @@
             <td>{{ $student ->gender}}</td>
             <td>No score</td>
             <td>
-              <a href="#" class="editButton">Edit</a>
-              <a href="#" class="deleteButton">Delete</a>
-
+              <a href="{{ URL('student/edit', $student -> id) }}" class="editButton">Edit</a>
+              <form action="{{ URL('student/delete', $student -> id) }}" method="post" style="display:inline;" onsubmit="return confirm ('Are you sure you want to delete this student')">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="btn btn-danger btn-sm">Delete</button>
+              </form>
             </td>
 
           </tr>
         @endforeach
       </tbody>
     </table>
+    <div class = 'pageinationDiv'>
+      {{ $students
+      ->appends(request()->query())
+      ->links('pagination::bootstrap-5')}}
+    </div>
+
   </section>
 @endsection
+
+    <table>
