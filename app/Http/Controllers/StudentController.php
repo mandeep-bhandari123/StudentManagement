@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\StudentAddRequest;
 use App\Models\Student;
 use Illuminate\Http\Request;
 
@@ -27,7 +28,20 @@ class StudentController extends Controller
         return view('students.index', compact('students'));
     }
 
-    public function create( Request $request){
+    public function create( StudentAddRequest $request){
+
+      #Validating User Input
+      // $request->validate([
+        // 'name'=>"required|string|max:225",
+        // "email"=>"required|email|unique:students:email",
+        // "age"=>"required|integer|min:1|max:100",
+        // "date_of_birth"=>"required:date",
+        // "gender"=>"required|in:m,f",
+        // "score" => "required|integer|min:0|max:100"
+      // ]
+      // ,[
+      //   'name.require'=>"Please wiite Student Name"]   We can create custome error messages
+      // ); 
       $student = new Student();
       $student ->name = $request ->name;
       $student ->email = $request -> email;
