@@ -112,7 +112,11 @@
       </thead>
       <tbody>
         @foreach ( $students as $student )
-          <tr>
+            <tr>
+            @if($student -> image)
+              <img src = "{{ asset('storage/').$student->image }}">
+            @endif 
+            </tr>
             <td>{{ $student ->id }}</td>
             <td>{{ $student ->name}}</td>
             <td>{{ $student ->email}}</td>
