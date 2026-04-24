@@ -100,6 +100,7 @@
     </form>
       <thead>
         <tr>
+          <th>Image</th>
           <th>ID</th>
           <th>Name</th>
           <th>Email</th>
@@ -112,11 +113,12 @@
       </thead>
       <tbody>
         @foreach ( $students as $student )
-            <tr>
-            @if($student -> image)
-              <img src = "{{ asset('storage/').$student->image }}">
-            @endif 
-            </tr>
+          <tr>
+            <td>
+              @if($student -> image)
+                <img src = "{{ asset('storage/'.$student->image) }}" width="100" height="100"> 
+              @endif 
+            </td>
             <td>{{ $student ->id }}</td>
             <td>{{ $student ->name}}</td>
             <td>{{ $student ->email}}</td>

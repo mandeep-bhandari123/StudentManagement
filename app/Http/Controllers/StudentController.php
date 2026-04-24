@@ -53,6 +53,7 @@ class StudentController extends Controller
       $student ->age = $request -> age;
       $student->date_of_birth = $request->date_of_birth; // you were missing this too
       $student ->gender = $request -> gender;
+      $student -> image = $imagePath;
       $student->save();
       return redirect('student');
     } 
