@@ -25,10 +25,11 @@ class StudentAddRequest extends FormRequest
         return [
             //
         'name'=>"required|string|max:225",
-        "email"=>"required|email|unique:students:email",
+        "email"=>"required|email|unique:students,email",
         "age"=>"required|integer|min:1|max:100",
-        "date_of_birth"=>"required:date",
+        "date_of_birth"=>"required|date",
         "gender"=>"required|in:m,f",
+        'image'=>'nullable|image|mimes:png,jpg,gif|max:10000',
         ];
     }
     public function messages(){

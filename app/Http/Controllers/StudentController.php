@@ -42,6 +42,11 @@ class StudentController extends Controller
       // ,[
       //   'name.require'=>"Please wiite Student Name"]   We can create custome error messages
       // ); 
+      $imagePath = null;
+      if ($request -> hasFile('image')){
+        $imagePath = $request->file('image')->store('photos','public');
+      }
+
       $student = new Student();
       $student ->name = $request ->name;
       $student ->email = $request -> email;
